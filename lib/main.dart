@@ -76,6 +76,7 @@ class contact extends StatelessWidget {
               child: Text("Hello suresh"),
             ),
           ],
+
         ),
       ),
     );
