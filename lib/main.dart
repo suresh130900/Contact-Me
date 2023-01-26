@@ -8,6 +8,7 @@ void main()
   runApp(Contact());
 }
 
+
 //creating a enum for ligth and dark theme
 enum App_theme { Light, Dark}
 
