@@ -88,15 +88,28 @@ class contact extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(
-              color: Colors.grey,
-            ),
+            // Divider(
+            //   color: Colors.grey,
+            // ),
+            Divide(),
+            MobileNumber(),
+            Divide(),
+            EmailmeButton(),
+            Divide(),
+            Address(),
           ],
         ),
       ),
     );
   }
 
+  //divider Widget
+  Widget Divide()
+  {
+    return Divider(
+      color: Colors.grey,
+    );
+  }
 
 //widget for call button
 Widget CallButton()
@@ -199,6 +212,59 @@ Widget CallButton()
         ),
         Text("Pay"),
       ],
+    );
+  }
+
+  //creating a mobile phone number Widget
+  Widget MobileNumber()
+  {
+    //list tile is used to create a row with leading and a middle text and a trailing
+    //The leading property shows a call icon. The title property displays the phone number.
+    // The subtitle property shows the category of the phone number as “Mobile.”
+    // The trailing property provides the IconButton for text message action.
+    return ListTile(
+      leading: Icon(Icons.call),
+      title: Text("9653413472"),
+      subtitle: Text("Mobile Number "),
+      trailing: IconButton(
+        icon: Icon(
+          Icons.message,
+          color: Colors.indigo.shade800,
+        ),
+        onPressed: () {} ,
+      ),
+    );
+  }
+
+  //creating a EmailME Button
+  Widget EmailmeButton()
+  {
+    return ListTile(
+      leading: Text(""),
+      title: Text("sureshchaudhary2017@gmail.com"),
+      subtitle: Text("Email ME"),
+      trailing: IconButton(onPressed: () {},
+          icon: Icon(
+            Icons.email,
+            color: Colors.indigo.shade800,
+          ),
+      ),
+    );
+  }
+
+  //Address Widget
+  Widget Address()
+  {
+    return ListTile(
+      leading: Icon(Icons.location_on),
+      title: Text("Mumbai, India"),
+      subtitle: Text("Home"),
+      trailing: IconButton(onPressed: () {},
+          icon: Icon(
+            Icons.directions,
+            color: Colors.indigo.shade800,
+          ),
+      ),
     );
   }
 }
