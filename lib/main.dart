@@ -1,13 +1,69 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 
 void main()
 {
-  runApp(contact());
+  runApp(Contact());
 }
 
-class contact extends StatelessWidget {
-  const contact({Key? key}) : super(key: key);
+//creating a enum for ligth and dark theme
+enum App_theme { Light, Dark}
+
+//creating a class fot ligth theme
+class MyAppTheme {
+  static ThemeData appThemeLigth() {
+    return ThemeData(
+      brightness: Brightness.light,
+      appBarTheme: AppBarTheme(
+        color: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.indigo.shade800,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.indigo.shade800,
+      ),
+
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
+    );
+  }
+
+
+  static ThemeData appThemeDark() {
+    return ThemeData(
+      brightness: Brightness.dark,
+      //creating a theme for appbar
+      appBarTheme: AppBarTheme(
+        color: Colors.black,
+        //creating a color for the icons on the appbar
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.orange,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+      ),
+    );
+  }
+}
+class Contact extends StatefulWidget {
+  @override
+  _ContactProfilePageState createState() => _ContactProfilePageState();
+}
+
+class _ContactProfilePageState extends State<Contact> {
+
+  //creating a variable
+  var currentTheme = App_theme.Light;
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +72,17 @@ class contact extends StatelessWidget {
       //removing the debug icon which is in the rigth side of the app
       debugShowCheckedModeBanner: false,
 
-      //Scafflod porvide the app bar and body for the app
+      theme: currentTheme == App_theme.Dark
+          ? MyAppTheme.appThemeDark()
+          : MyAppTheme.appThemeLigth(),
+
       home: Scaffold(
 
         //this is appbar
-        appBar: AppBar( backgroundColor: Colors.purple,
+        appBar: AppBar(
+          // backgroundColor: Colors.purple,
           //this is the icon on the left side of the app
-          leading: Icon(Icons.arrow_back,color: Colors.black,),
+          leading: Icon(Icons.arrow_back,),
           //this is the icon on the rigth side of the app
           //it has some actions which takes array of Widgets
           actions: <Widget>[
@@ -31,7 +91,8 @@ class contact extends StatelessWidget {
                 //printing while we click on the star icon
                 print("This Contact is Starred ");
               },
-              icon: Icon(Icons.star_border),color: Colors.black,)
+              icon: Icon(Icons.star_border),
+            )
           ],
         ),
 
@@ -73,24 +134,10 @@ class contact extends StatelessWidget {
               color: Colors.grey,
             ),
             Container(
-              margin: const EdgeInsets.only(top: 8,bottom: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-
-                  //this are the Widgets methods written below
-                  CallButton(),
-                  TextButton(),
-                  VideoButton(),
-                  EmailButton(),
-                  DirectionButton(),
-                  PayButton(),
-                ],
-              ),
+              margin: const EdgeInsets.only(top: 8, bottom: 8),
+              child: profileActionItems(),
             ),
-            // Divider(
-            //   color: Colors.grey,
-            // ),
+
             Divide(),
             MobileNumber(),
             Divide(),
@@ -98,6 +145,27 @@ class contact extends StatelessWidget {
             Divide(),
             Address(),
           ],
+        ),
+
+
+        //creating a floating action button
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print("Toogle ");
+          },
+          child: IconButton(
+              icon: Icon(
+                Icons.threesixty,
+              ),
+            onPressed: () {
+            setState(()
+            {
+              currentTheme == App_theme.Dark
+                  ? currentTheme = App_theme.Light
+                  : currentTheme = App_theme.Dark;
+            });
+          },
+          ),
         ),
       ),
     );
@@ -108,6 +176,21 @@ class contact extends StatelessWidget {
   {
     return Divider(
       color: Colors.grey,
+    );
+  }
+
+
+  Widget profileActionItems() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        CallButton(),
+        TextButton(),
+        VideoButton(),
+        EmailButton(),
+        DirectionButton(),
+        PayButton(),
+      ],
     );
   }
 
@@ -125,7 +208,6 @@ Widget CallButton()
         },
           icon: Icon(
             Icons.call,
-            color: Colors.indigo.shade800,
           ),
         ),
         Text("Call"),
@@ -143,7 +225,6 @@ Widget CallButton()
         },
             icon: Icon(
               Icons.message,
-              color: Colors.indigo.shade800,
             ),
         ),
         Text("Text"),
@@ -159,7 +240,6 @@ Widget CallButton()
           print("Video Button is presses");
         }, icon: Icon(
           Icons.video_call,
-          color: Colors.indigo.shade800,
         ),
         ),
         Text("Video Call"),
@@ -174,7 +254,6 @@ Widget CallButton()
         IconButton(onPressed: () {},
             icon: Icon(
               Icons.email,
-              color: Colors.indigo.shade800,
             ),
         ),
         Text("Email"),
@@ -191,7 +270,6 @@ Widget CallButton()
         IconButton(onPressed: () {},
             icon: Icon(
               Icons.directions,
-              color: Colors.indigo.shade800,
             ),
         ),
         Text("Directions"),
@@ -207,7 +285,7 @@ Widget CallButton()
         IconButton(onPressed: () {} ,
             icon: Icon(
               Icons.attach_money,
-              color: Colors.indigo.shade800,
+
             ),
         ),
         Text("Pay"),
@@ -229,7 +307,6 @@ Widget CallButton()
       trailing: IconButton(
         icon: Icon(
           Icons.message,
-          color: Colors.indigo.shade800,
         ),
         onPressed: () {} ,
       ),
@@ -246,7 +323,6 @@ Widget CallButton()
       trailing: IconButton(onPressed: () {},
           icon: Icon(
             Icons.email,
-            color: Colors.indigo.shade800,
           ),
       ),
     );
@@ -262,7 +338,6 @@ Widget CallButton()
       trailing: IconButton(onPressed: () {},
           icon: Icon(
             Icons.directions,
-            color: Colors.indigo.shade800,
           ),
       ),
     );
