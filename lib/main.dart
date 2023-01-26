@@ -56,7 +56,7 @@ class contact extends StatelessWidget {
                 child: Row(
                   //row or coloumn
 
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     //a child can have row and row can have multiple children
                     children: <Widget>[
                       Padding(padding: const EdgeInsets.all(8.0),
@@ -73,12 +73,132 @@ class contact extends StatelessWidget {
               color: Colors.grey,
             ),
             Container(
-              child: Text("Hello suresh"),
+              margin: const EdgeInsets.only(top: 8,bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+
+                  //this are the Widgets methods written below
+                  CallButton(),
+                  TextButton(),
+                  VideoButton(),
+                  EmailButton(),
+                  DirectionButton(),
+                  PayButton(),
+                ],
+              ),
+            ),
+            Divider(
+              color: Colors.grey,
             ),
           ],
-
         ),
       ),
+    );
+  }
+
+
+//widget for call button
+Widget CallButton()
+  {
+    //this is returning coloum and not material app
+    return Column(
+      children: <Widget>[
+
+        //icon button is used to display inbuild icons
+        IconButton(onPressed: () {
+          //just printing in the console
+          print("Call Button is presses");
+        },
+          icon: Icon(
+            Icons.call,
+            color: Colors.indigo.shade800,
+          ),
+        ),
+        Text("Call"),
+      ],
+    );
+  }
+
+
+  Widget TextButton()
+  {
+    return Column(
+      children: <Widget>[
+        IconButton(onPressed: () {
+          print("Text button is pressed ");
+        },
+            icon: Icon(
+              Icons.message,
+              color: Colors.indigo.shade800,
+            ),
+        ),
+        Text("Text"),
+      ],
+    );
+  }
+
+  Widget VideoButton()
+  {
+    return Column(
+      children: <Widget>[
+        IconButton(onPressed: (){
+          print("Video Button is presses");
+        }, icon: Icon(
+          Icons.video_call,
+          color: Colors.indigo.shade800,
+        ),
+        ),
+        Text("Video Call"),
+      ],
+    );
+  }
+
+  Widget EmailButton()
+  {
+    return Column(
+      children: <Widget>[
+        IconButton(onPressed: () {},
+            icon: Icon(
+              Icons.email,
+              color: Colors.indigo.shade800,
+            ),
+        ),
+        Text("Email"),
+      ],
+    );
+  }
+
+  //direction button
+
+  Widget DirectionButton()
+  {
+    return Column(
+      children: <Widget>[
+        IconButton(onPressed: () {},
+            icon: Icon(
+              Icons.directions,
+              color: Colors.indigo.shade800,
+            ),
+        ),
+        Text("Directions"),
+      ],
+    );
+  }
+
+  //Paying button
+  Widget PayButton()
+  {
+    return Column(
+      children: <Widget>[
+        IconButton(onPressed: () {} ,
+            icon: Icon(
+              Icons.attach_money,
+              color: Colors.indigo.shade800,
+            ),
+        ),
+        Text("Pay"),
+      ],
     );
   }
 }
